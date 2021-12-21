@@ -1,0 +1,32 @@
+version: '3.4'
+services:
+  severity-api:
+    image: ml-model-api-service:testing
+    environment:
+      CONF_NAME: local
+      CONF_LOCAL_PATH: app/configs/example.yaml
+      MLFLOW_URI: https://mlflow.ttytang.com/
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION : ${AWS_REGION}
+      WORKERS_PER_CORE: 0.03125
+      MAX_WORKERS: 1
+      PORT: 8080
+      LOG_LEVEL: info
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 2gb
+      restart_policy:
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+    ports:
+      - "8881:8080"
+    healthcheck:
+      test: "curl -f http://localhost:8080/healthcheck/ || exit 1"
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 30s

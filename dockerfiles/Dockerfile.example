@@ -1,0 +1,18 @@
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8-slim
+
+RUN apt-get update && \
+    apt-get install libgomp1 && \
+    apt-get -y install curl && \
+    apt-get -y install gcc
+
+WORKDIR /app
+
+COPY . /app
+COPY requirements/requirements.txt /app
+COPY requirements/requirements-example.txt /app
+
+RUN pip install --upgrade pip
+RUN pip install -r /app/requirements.txt
+RUN pip install -r /app/requirements-example.txt
+
+WORKDIR /app

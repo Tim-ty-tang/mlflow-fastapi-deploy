@@ -1,0 +1,33 @@
+META:
+  MODEL_STACK: "EXAMPLE"
+MODELS:
+  EXAMPLE:
+    INFO:
+      notes: null
+      MODEL_NAME: "example"
+      VERSION: "1"
+    PICKLES:
+      OBJECT_SOURCE: "mlflow"
+      OBJECT_PATH: "models:/example/1"
+      CACHE: False
+      HASH: null
+    CALLS:
+      CALL_PARAMS:
+        predict: 
+          call_params: null
+          example_input: "app/data/example_input.json"
+  EXPLAINER_EXAMPLE:
+    INFO:
+      notes: null
+      MODEL_NAME: "explainer_example"
+      VERSION: "1"
+    PICKLES:
+      OBJECT_SOURCE: "mlflow"
+      OBJECT_PATH: "models:/explainer_example/1"
+      CACHE: False
+      HASH: null
+    CALLS:
+      CALL_PARAMS:
+        predict: 
+          call_params: null
+          example_input: "app/data/example_input.json"
